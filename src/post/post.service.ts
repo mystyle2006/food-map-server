@@ -189,6 +189,8 @@ export class PostService {
       await this.imageRepository.delete(imageIds);
     }
 
+    console.log(imageUris);
+
     const newImages = imageUris.map((uri) => this.imageRepository.create(uri));
     await this.imageRepository.save(newImages);
 

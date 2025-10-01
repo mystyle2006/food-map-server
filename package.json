@@ -28,6 +28,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/serve-static": "^4.0.1",
     "@nestjs/typeorm": "^10.0.2",
+    "@supabase/supabase-js": "^2.58.0",
     "apple-signin-auth": "^1.7.6",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
