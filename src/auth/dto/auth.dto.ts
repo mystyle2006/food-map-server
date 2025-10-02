@@ -1,31 +1,25 @@
-import {
-  IsString,
-  Matches,
-  MaxLength,
-  MinLength,
-  ValidateIf,
-} from 'class-validator';
+import { IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
 export class AuthDto {
   @IsString()
   @MinLength(6, {
-    message: '올바른 이메일 형식이 아닙니다.',
+    message: 'Invalid email format.',
   })
   @MaxLength(50, {
-    message: '올바른 이메일 형식이 아닙니다.',
+    message: 'Invalid email format.',
   })
   @Matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
-    message: '올바른 이메일 형식이 아닙니다.',
+    message: 'Invalid email format.',
   })
   email: string;
 
   @IsString()
   @MinLength(8, {
-    message: '이메일 또는 비밀번호가 일치하지 않습니다.',
+    message: 'Email or password does not match.',
   })
   @MaxLength(20)
   @Matches(/^[a-zA-z0-9]*$/, {
-    message: '비밀번호가 영어 또는 숫자 조합이 아닙니다.',
+    message: 'Password must contain only English letters and numbers.',
   })
   password: string;
 }

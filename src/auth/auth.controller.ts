@@ -47,6 +47,12 @@ export class AuthController {
     return this.authService.editProfile(editProfileDto, user);
   }
 
+  @Delete('/me')
+  @UseGuards(AuthGuard())
+  deleteAccount(@GetUser() user: User) {
+    return this.authService.deleteAccount(user);
+  }
+
   @Post('/logout')
   @UseGuards(AuthGuard())
   logout(@GetUser() user: User) {

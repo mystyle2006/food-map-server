@@ -27,6 +27,16 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
 
+  async deleteAccount(user: User) {
+    try {
+      await this.userRepository.delete(user.id);
+      return { message: 'Deleted Account Successfully!' };
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException('Error while deleting account.');
+    }
+  }
+
   async signup(authDto: AuthDto) {
     const { email, password } = authDto;
     const salt = await bcrypt.genSalt();
@@ -72,9 +82,7 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({ email });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      throw new UnauthorizedException(
-        '이메일 또는 비밀번호가 일치하지 않습니다.',
-      );
+      throw new UnauthorizedException('Email or password does not match.');
     }
 
     const { accessToken, refreshToken } = await this.getTokens({ email });
