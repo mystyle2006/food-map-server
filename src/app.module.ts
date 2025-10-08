@@ -8,6 +8,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { FavoriteModule } from './favorite/favorite.module';
 import { LoggerMiddleware } from './@common/logger';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { LoggerMiddleware } from './@common/logger';
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/static',
     }),
     PostModule,
     AuthModule,
@@ -31,6 +33,7 @@ import { LoggerMiddleware } from './@common/logger';
     FavoriteModule,
   ],
   providers: [ConfigService],
+  controllers: [HealthController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
